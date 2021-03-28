@@ -19,32 +19,32 @@ public class Drivers {
     @Getter @Setter
     private Driver driverToCreate = new Driver();
 
+    @Getter @Setter
     private List<Driver> allDrivers;
 
     @PostConstruct
     public void init(){
         loadDrivers();
+        /*Map<String, String> requestParameters =
+                FacesContext.getCurrentInstance().getExternalContext().getRequestParameterMap();
+        Integer driverId = Integer.parseInt(requestParameters.get("driverId"));
+        this.driverToUpdate = driversDAO.findOne(driverId);
+        System.out.println("driver ID" + driverId);*/
     }
 
     public void loadDrivers() {
         this.allDrivers = driversDAO.loadAll();
     }
 
-    public List<Driver> getAllPlayers(){
-        return allDrivers;
-    }
-
     @Transactional
     public String createDriver(){
         this.driversDAO.persist(driverToCreate);
-        return "success";
+        return "drivers?faces-redirect=true";
     }
 
-    /*public Driver getPlayerToCreate() {
-        return driverToCreate;
+    @Transactional
+    public String deleteDriver(Driver driver){
+        this.driversDAO.delete(driver);
+        return "drivers?faces-redirect=true";
     }
-
-    public void setPlayerToCreate(Driver driverToCreate) {
-        this.driverToCreate = driverToCreate;
-    }*/
 }
