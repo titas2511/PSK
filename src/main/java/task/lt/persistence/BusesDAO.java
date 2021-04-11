@@ -13,7 +13,7 @@ public class BusesDAO {
     private EntityManager em;
 
     public List<Bus> loadAll() {
-        return em.createNamedQuery("Bus.findAll", Bus.class).getResultList();
+        return em.createNamedQuery("Bus.findAllWithDrivers", Bus.class).getResultList();
     }
 
     public void setEm(EntityManager em) {
@@ -22,6 +22,14 @@ public class BusesDAO {
 
     public void persist(Bus bus){
         this.em.persist(bus);
+    }
+
+    public Bus findOne(Integer busId){
+        return this.em.find(Bus.class, busId);
+    }
+
+    public void update(Bus bus){
+        this.em.merge(bus);
     }
 
     public void delete(Bus bus){
