@@ -14,13 +14,16 @@
     <result column="bus_id" jdbcType="INTEGER" property="busId" />
     <result column="driver_id" jdbcType="INTEGER" property="driverId" />
 
-    <collection property="tickets" javaType="ArrayList"
+    <!--<collection property="tickets" javaType="ArrayList"
                 ofType="task.lt.mybatis.model.Ticket" column="id"
-                select="selectAllWithTickets"/>
-    <!--<collection property="tickets" ofType="task.lt.mybatis.model.Ticket">
-      <id property="id" column="ticket_id" />
-      <result property="name" column="s_name" />
-    </collection>-->
+                select="selectTicketsForTrip"/>-->
+    <collection property="tickets" ofType="task.lt.mybatis.model.Ticket">
+      <id column="id" jdbcType="INTEGER" property="id" />
+      <result column="is_bought" jdbcType="BIT" property="isBought" />
+      <result column="price" jdbcType="DOUBLE" property="price" />
+      <result column="seat" jdbcType="INTEGER" property="seat" />
+      <result column="trip_id" jdbcType="INTEGER" property="tripId" />
+    </collection>
   </resultMap>
 
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
@@ -77,15 +80,15 @@
     from public.trip
   </select>
 
-  <select id="selectAllWithTickets" resultType="task.lt.mybatis.model.Ticket">
-    SELECT tic.*
-    FROM public.ticket tic
-    WHERE tic.trip_id = #{id}
+  <select id="selectTripsWithTickets" resultMap="BaseResultMap">
+    select *
+    from trip tip
+    left join ticket tic on tip.id = tic.trip_id
   </select>
 
   <select id="selectTicketsByTripId" parameterType="map" resultType="task.lt.mybatis.model.Ticket">
     SELECT tic.*
     FROM public.ticket tic
-    WHERE tic.trip_id = #{tripId}
+    WHERE tic.trip_id = #{tripId,jdbcType=INTEGER}
   </select>
 </mapper>

@@ -9,11 +9,12 @@
         <typeAlias type="task.lt.mybatis.model.Ticket" alias="Ticket"/>
         <typeAlias type="task.lt.mybatis.model.Trip" alias="Trip"/>
         <typeAlias type="task.lt.mybatis.model.TripLog" alias="TripLog"/>
+        <typeAlias type="task.lt.mybatis.model.DriverBus" alias="DriverBus"/>
     </typeAliases>
     <environments default="development">
         <environment id="development">
             <transactionManager type="MANAGED"/>
-            <dataSource type="UNPOOLED">
+            <dataSource type="POOLED">
                 <property name = "driver" value = "org.postgresql.Driver"/>
                 <property name = "url" value = "jdbc:postgresql://localhost:5432/autobusu_sistema"/>
                 <property name = "username" value = "postgres"/>
@@ -26,6 +27,7 @@
         <mapper resource="mybatis/xml/TripMapper.xml"/>
         <mapper resource="mybatis/xml/BusMapper.xml"/>
         <mapper resource="mybatis/xml/TicketMapper.xml"/>
+        <mapper resource="mybatis/xml/DriverBusMapper.xml"/>
         <mapper resource="mybatis/xml/TripLogMapper.xml"/>
     </mappers>
 </configuration>
