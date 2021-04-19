@@ -17,7 +17,7 @@
     <!--<collection property="tickets" javaType="ArrayList"
                 ofType="task.lt.mybatis.model.Ticket" column="id"
                 select="selectTicketsForTrip"/>-->
-    <!--<association property="assignedDriver" javaType="task.lt.mybatis.model.Driver">
+    <association property="assignedDriver" javaType="task.lt.mybatis.model.Driver">
       <id column="driver_id" jdbcType="INTEGER" property="driverId" />
       <result column="cell_phone" jdbcType="VARCHAR" property="cellPhone" />
       <result column="name" jdbcType="VARCHAR" property="name" />
@@ -28,7 +28,7 @@
       <id column="bus_id" jdbcType="INTEGER" property="busId" />
       <result column="current_fuel" jdbcType="INTEGER" property="currentFuel" />
       <result column="plate_number" jdbcType="VARCHAR" property="plateNumber" />
-    </association>-->
+    </association>
 
     <collection property="tickets" ofType="task.lt.mybatis.model.Ticket">
       <id column="id" jdbcType="INTEGER" property="id" />

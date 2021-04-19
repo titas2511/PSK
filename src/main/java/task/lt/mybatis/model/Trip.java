@@ -3,6 +3,26 @@ package task.lt.mybatis.model;
 import java.util.List;
 
 public class Trip {
+    private Driver assignedDriver;
+    private Bus assignedBus;
+    private List<Ticket> tickets;
+
+    public Driver getAssignedDriver() {
+        return assignedDriver;
+    }
+
+    public void setAssignedDriver(Driver assignedDriver) {
+        this.assignedDriver = assignedDriver;
+    }
+
+    public Bus getAssignedBus() {
+        return assignedBus;
+    }
+
+    public void setAssignedBus(Bus assignedBus) {
+        this.assignedBus = assignedBus;
+    }
+
     public List<Ticket> getTickets() {
         return tickets;
     }
@@ -10,8 +30,6 @@ public class Trip {
     public void setTickets(List<Ticket> tickets) {
         this.tickets = tickets;
     }
-
-    private List<Ticket> tickets;
 
     /**
      *
