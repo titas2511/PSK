@@ -38,14 +38,6 @@
                 <f:facet name = "header">Delete driver</f:facet>
                 <h:commandButton value="Delete" action="#{driversMyBatis.deleteDriver(driver.driverId)}" />
             </h:column>
-            <!-- <h:column>
-                <f:facet name = "header">Update driver</f:facet>
-                <h:link value="Update" outcome="driverToUpdate?driverId=#{driver.driverId}" />
-            </h:column>
-            <h:column>
-                <f:facet name = "header">See assigned trips</f:facet>
-                <h:commandButton value="See" action="#{drivers.loadTripsByDriverId(driver.driverId)}" />
-            </h:column> -->
         </h:dataTable>
     </h:form>
 
