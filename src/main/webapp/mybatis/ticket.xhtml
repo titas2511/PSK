@@ -36,6 +36,53 @@
             </h:column>
         </h:dataTable>
     </h:form>
+    <h2>Add ticket:</h2>
+    <h:form>
+        <h3>Assign trip for ticket</h3>
+        <h:dataTable value = "#{tripsMyBatis.allTrips}" var = "trip"
+                     styleClass = "mainTable"
+                     headerClass = "tableHeader"
+                     rowClasses = "tableOddRow,tableEvenRow">
+            <h:column>
+                <f:facet name = "header">Name</f:facet>
+                #{trip.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Departure</f:facet>
+                #{trip.departureTime}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Arrival</f:facet>
+                #{trip.arrivalTime}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Arrival</f:facet>
+                #{trip.arrivalTime}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Assign</f:facet>
+                <h:commandButton value="Assign" action="#{ticketsMyBatis.ticketToCreate.setTripId(trip.id)}" />
+            </h:column>
+        </h:dataTable>
+
+    <h3>Fill ticket details: </h3>
+        <h:outputLabel>Price </h:outputLabel>
+        <h:inputText value="#{ticketsMyBatis.ticketToCreate.price}" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Seat </h:outputLabel>
+        <h:inputText value="#{ticketsMyBatis.ticketToCreate.seat}" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+        <h:outputLabel>Is bought </h:outputLabel>
+        <h:inputText value="#{ticketsMyBatis.ticketToCreate.isBought}" />
+        <h:outputText value="&lt;br/&gt;" escape="false" />
+
+        <h:commandButton value="Submit" action="#{ticketsMyBatis.createTicket}" />
+    </h:form>
+
 
     <h:outputText value="&lt;br/&gt;" escape="false" />
     <h:link outcome="/index" value="Main page"/>
