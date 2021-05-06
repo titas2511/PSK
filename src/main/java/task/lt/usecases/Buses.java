@@ -4,8 +4,10 @@ import lombok.Getter;
 import lombok.Setter;
 import task.lt.entities.Bus;
 import task.lt.entities.Driver;
+import task.lt.interceptors.LoggedInvocation;
 import task.lt.persistence.BusesDAO;
 import task.lt.persistence.DriversDAO;
+import task.lt.services.PlateNumberChecker;
 
 import javax.annotation.PostConstruct;
 import javax.faces.view.ViewScoped;
@@ -23,6 +25,9 @@ public class Buses implements Serializable {
 
     @Inject
     private DriversDAO driversDAO;
+
+    @Inject
+    private PlateNumberChecker plateNumberChecker;
 
     @Getter
     @Setter
@@ -56,12 +61,17 @@ public class Buses implements Serializable {
     }*/
 
     @Transactional
+    @LoggedInvocation
     public String createBus(){
+        if (!plateNumberChecker.checkPlateNumber(busToCreate.getPlateNumber())){
+            return "Plate number doesn't pass validation";
+        }
         this.busesDAO.persist(busToCreate);
         return "buses?faces-redirect=true";
     }
 
     @Transactional
+    @LoggedInvocation
     public String assignDriverToBus(Integer driverId, Integer busId){
         Driver driver = this.driversDAO.findOne(driverId);
         if (driver == null) {
@@ -74,6 +84,7 @@ public class Buses implements Serializable {
     }
 
     @Transactional
+    @LoggedInvocation
     public String deleteBus(Bus busToDelete){
         this.busesDAO.delete(busToDelete);
         return "buses?faces-redirect=true";
