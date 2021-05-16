@@ -35,6 +35,11 @@
         </h:column>
 
         <h:column>
+            <f:facet name = "header">Card number</f:facet>
+            #{driver.cardNumber}
+        </h:column>
+
+        <h:column>
             <f:facet name = "header">Update driver</f:facet>
             <h:link value="Update" outcome="driverToUpdate?driverId=#{driver.driverId}" />
         </h:column>
